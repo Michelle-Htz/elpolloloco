@@ -8,6 +8,9 @@ class World {
     clouds = [
         new Cloud(),
     ];
+    backgroundObjects = [
+        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 0)
+    ];
     canvas;
     ctx;
 
@@ -21,14 +24,14 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //Canvas wird immer wieder geleert
-        this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
-        this.enemies.forEach(enemy => { //es wird auf jedes Chicken einzeln zugegriffen
-            this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
-        });
 
-        this.clouds.forEach(cloud => {
-            this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height);
-        });
+        this.addObjectsToMap(this.backgroundObjects);
+        this.addObjectsToMap(this.clouds);
+        this.addObjectsToMap(this.enemies);
+        this.addToMap(this.character);
+
+
+
 
 
         //draw wird immer wieder aufgerufen
@@ -38,5 +41,15 @@ class World {
 
         });
 
+    }
+
+    addObjectsToMap(objects) {
+        objects.forEach(o => {
+            this.addToMap(o);
+        })
+    }
+
+    addToMap(mo) {
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
     }
 }
