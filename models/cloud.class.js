@@ -8,5 +8,10 @@ class Cloud extends MovableObject {
         //super() benutzt man, wenn man Methoden des übergeordnete Objekt aufruft
         super().loadImage('img/5.Fondo/Capas/4.nubes/1.png');
         this.x = Math.random() * 500; //math.random() generiert eine zufällige Zahl zwischen 200-700
+        this.animate();
+    }
+
+    animate() {
+        this.moveLeft();
     }
 }
