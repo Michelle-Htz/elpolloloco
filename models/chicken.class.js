@@ -15,7 +15,7 @@ class Chicken extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
 
         this.x = 200 + Math.random() * 500; //math.random() generiert eine zufällige Zahl zwischen 200-700
-        this.speed = 0.15 + Math.random() * 0.25;
+        this.speed = 0.15 + Math.random() * 0.5;
 
 
         this.animate();
