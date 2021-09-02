@@ -18,14 +18,20 @@ class World {
     ];
     canvas;
     ctx;
+    keyboard;
 
-    constructor(canvas) {
+    constructor(canvas, keyboard) { //Das Keyboard muss ebenfalls an den Constructor weitergegeben werden. 
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas; //das obere Canvas wird in dieses Canvas reingeschrieben, so kann ich mit this auf height und width zugreifen. 
+        this.keyboard = keyboard;
         this.draw();
+        this.setWorld();
 
     }
 
+    setWorld() { //Die Funktion übergibt this, damit die aktuelle Welt weitergegeben wird. 
+        this.character.world = this;
+    }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //Canvas wird immer wieder geleert
