@@ -14,6 +14,8 @@ class Character extends MovableObject {
 
     world; //Damit die Verküpfung klappt muss die Variable world auch hier angelegt sein. 
 
+    walking_sound = new Audio('audio/walking.mp3');
+
     constructor() {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -24,15 +26,22 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
+            this.walking_sound.pause();
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+                //&& = x kleiner als (700) dann darf er nicht weiter laufen.
                 this.x += this.speed;
                 this.otherDirection = false;
+                this.walking_sound.play();
             }
-            if (this.world.keyboard.LEFT) {
+            if (this.world.keyboard.LEFT && this.x > 0) {
+                this.walking_sound.pause();
+                //nur wenn x größer als Null ist kann er nach links laufen, ansonsten bleibt er stehen.
+                //&& = und x muss kleiner sein als wold.level_end_x (700)
                 this.x -= this.speed;
                 this.otherDirection = true;
+                this.walking_sound.play();
             }
-            this.world.camera_x = -this.x;
+            this.world.camera_x = -this.x + 100; //+100 schiebt den Character weiter nach rechts. 
         }, 1000 / 60);
         //mein soll dem IMG aus dem Chache entsprechen soll 
         setInterval(() => {

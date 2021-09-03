@@ -1,40 +1,6 @@
 class World {
     character = new Character();
-    enemies = [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-    ];
-    clouds = [
-        new Cloud(),
-    ];
-    backgroundObjects = [
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', -719),
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', -719),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', -719),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', -719),
-
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 0),
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 0),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 0),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 0),
-
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719),
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', 719),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 719),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719),
-
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 2),
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 719 * 2),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 719 * 2),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 719 * 2),
-
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 3),
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', 719 * 3),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 719 * 3),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719 * 3)
-
-    ];
+    level = level1; //Es wird auf alle Variablen als Level 1 zugegriffen
     canvas;
     ctx;
     keyboard;
@@ -57,9 +23,9 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //Canvas wird immer wieder geleert
         this.ctx.translate(this.camera_x, 0); //Der Ausschnitt wird 100 Px nach Links verschoben.
         //Dann malen wir alle Objekte
-        this.addObjectsToMap(this.backgroundObjects);
-        this.addObjectsToMap(this.clouds);
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0); //Dann schieben wir unseren ctx wieder nach rechts. 

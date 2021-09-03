@@ -9,6 +9,8 @@ class Chicken extends MovableObject {
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png'
     ];
 
+    chicken_sound = new Audio('audio/chicken.mp3');
+
     constructor() {
         //super() benutzt man, wenn man Methoden des übergeordnete Objekt aufruft
         super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
@@ -17,10 +19,10 @@ class Chicken extends MovableObject {
         this.x = 200 + Math.random() * 500; //math.random() generiert eine zufällige Zahl zwischen 200-700
         this.speed = 0.15 + Math.random() * 0.5;
 
-
         this.animate();
     }
     animate() {
+
         this.moveLeft();
         setInterval(() => {
             let i = this.currentImage % this.IMAGES_WALKING.length;
