@@ -7,6 +7,7 @@ class MovableObject {
     imageCache = {}; //Eine JSON in dem die Bilder gespeichert sind
     currentImage = 0;
     speed = 0.15;
+    otherDirection = false; //Übergreifende Variable zum Spiegeln der Bilder. 
 
     loadImage(path) {
         this.img = new Image();
