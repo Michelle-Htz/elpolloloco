@@ -47,14 +47,7 @@ class Character extends MovableObject {
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) { // || = logisches Oder
                 //Lauf Animation
-                let i = this.currentImage % this.IMAGES_WALKING.length;
-                //i ist der Wert der sich erhöht und IMAGES WALK ist die Länge des Array. 
-                // % = Mathematischerrest, wenn der Wert i die Länge des Array übersteigt gängt er wieder bei Null an. 
-                // so entsteht eine Schleife
-                // i = 0, 1, 2, 3, 4, 5, 0
-                let path = this.IMAGES_WALKING[i]; //der aktuelle Pfad/Bild
-                this.img = this.imageCache[path]; //Das Bild wird hineingesetzt in den Chache
-                this.currentImage++; //Es wird immer um eins erhöht     
+                this.playAnimation(this.IMAGES_WALKING);
             }
         }, 50);
     }

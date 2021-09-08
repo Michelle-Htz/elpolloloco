@@ -33,4 +33,16 @@ class MovableObject {
             this.x -= this.speed; //Geschwindigkeit
         }, 1000 / 60); //es wird 60 mal pro Sekunde abgezogen  
     }
+
+
+    playAnimation(images) {
+        let i = this.currentImage % this.IMAGES_WALKING.length;
+        //i ist der Wert der sich erhöht und IMAGES WALK ist die Länge des Array. 
+        // % = Mathematischerrest, wenn der Wert i die Länge des Array übersteigt gängt er wieder bei Null an. 
+        // so entsteht eine Schleife
+        // i = 0, 1, 2, 3, 4, 5, 0
+        let path = images[i]; //der aktuelle Pfad/Bild
+        this.img = this.imageCache[path]; //Das Bild wird hineingesetzt in den Chache
+        this.currentImage++; //Es wird immer um eins erhöht     
+    }
 }
