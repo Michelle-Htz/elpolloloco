@@ -1,6 +1,6 @@
 class MovableObject {
     x = 50;
-    y = 220;
+    y = 250;
     height = 180;
     width = 80;
     img;
@@ -9,12 +9,12 @@ class MovableObject {
     speed = 0.15;
     otherDirection = false; //Übergreifende Variable zum Spiegeln der Bilder. 
     speedY = 0;
-    acceleration = 2.5;
+    acceleration = 2;
 
 
     applyGravity() {
         setInterval(() => {
-            if (this.isAboveGround()) {
+            if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
@@ -22,7 +22,7 @@ class MovableObject {
     }
 
     isAboveGround() {
-        return this.y < 150;
+        return this.y < 180;
     }
 
 
@@ -40,20 +40,17 @@ class MovableObject {
     }
 
     moveRight() {
-        console.log('Moving right');
-
+        this.x += this.speed;
     }
 
 
     moveLeft() {
-        setInterval(() => { //Jede Sekunde wird die Funktion neu ausgeführt
-            this.x -= this.speed; //Geschwindigkeit
-        }, 1000 / 60); //es wird 60 mal pro Sekunde abgezogen  
+        this.x -= this.speed;
     }
 
 
     playAnimation(images) {
-        let i = this.currentImage % this.IMAGES_WALKING.length;
+        let i = this.currentImage % images.length;
         //i ist der Wert der sich erhöht und IMAGES WALK ist die Länge des Array. 
         // % = Mathematischerrest, wenn der Wert i die Länge des Array übersteigt gängt er wieder bei Null an. 
         // so entsteht eine Schleife
@@ -61,5 +58,9 @@ class MovableObject {
         let path = images[i]; //der aktuelle Pfad/Bild
         this.img = this.imageCache[path]; //Das Bild wird hineingesetzt in den Chache
         this.currentImage++; //Es wird immer um eins erhöht     
+    }
+
+    jump() {
+        this.speedY = 30;
     }
 }

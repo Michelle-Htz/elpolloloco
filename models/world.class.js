@@ -66,4 +66,5 @@ class World {
             this.ctx.restore();
         }
     }
+
 }

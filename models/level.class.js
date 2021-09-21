@@ -4,7 +4,7 @@ class Level {
     backgroundObjects;
     level_end_x = 2200;
     coins;
-    bottel;
+    bottels;
 
     //die Variablen werden dem Constructor mitgegeben.
     constructor(enemies, clouds, backgroundObjects, coins, bottels) {

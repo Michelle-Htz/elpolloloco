@@ -22,8 +22,11 @@ class Chicken extends MovableObject {
         this.animate();
     }
     animate() {
+        setInterval(() => { //Jede Sekunde wird die Funktion neu ausgeführt
+            this.moveLeft();
+        }, 1000 / 60); //es wird 60 mal pro Sekunde abgezogen  
 
-        this.moveLeft();
+
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 250);
