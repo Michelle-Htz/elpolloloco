@@ -1,15 +1,11 @@
-class MovableObject {
-    x = 50;
-    y = 250;
-    height = 180;
-    width = 80;
-    img;
-    imageCache = {}; //Eine JSON in dem die Bilder gespeichert sind
-    currentImage = 0;
+class MovableObject extends DrawableObject {
+
     speed = 0.15;
     otherDirection = false; //Übergreifende Variable zum Spiegeln der Bilder. 
     speedY = 0;
     acceleration = 2;
+    energy = 100;
+    lastHit = 0;
 
 
     applyGravity() {
@@ -23,20 +19,6 @@ class MovableObject {
 
     isAboveGround() {
         return this.y < 180;
-    }
-
-
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    loadImages(arr) { //Es wird ein Array/JSON in die Funktion herrein gegeben
-        arr.forEach((path) => { // Entsprechend der Bilderanzahlt wird die Schleife wiederholt. //Path hat den Wert vom ersten Bild. 
-            let img = new Image(); //Es wird eine Variable mit neuem Bild angelegt.
-            img.src = path; //das Img Objekt wird in das img.src reingeladen.
-            this.imageCache[path] = img; //this = die Variable ist überall gültig //ohne this die Variable ist nur in der Funktion gültig
-        });
     }
 
     moveRight() {
@@ -61,6 +43,34 @@ class MovableObject {
     }
 
     jump() {
-        this.speedY = 30;
+        this.speedY = 25;
+    }
+
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height
+    }
+
+    hit() {
+        this.energy -= 5;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime(); //Zeit wird in Zahlenform gespeichert.
+            //so kann ich in der isHurt Funktion wissen welche Zeitspanne vergangen ist. 
+        }
+    }
+
+    isDead() {
+        return this.energy == 0;
+    }
+
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit; //Diference in Ms
+        //die aktuelle Zeit wird genommen und der letzte Schlag wird von ihr abgezogen. 
+        timepassed = timepassed / 1000; //Diferenz in Sekunden
+        return timepassed < 1;
     }
 }

@@ -5,6 +5,8 @@ class World {
     ctx;
     keyboard;
     camera_x = 0; //Variable die die ganze Welt (Canvas) verschiebt.
+    lifeBar = new LifeBar();
+    coinBar = new CoinBar();
 
     constructor(canvas, keyboard) { //Das Keyboard muss ebenfalls an den Constructor weitergegeben werden. 
         this.ctx = canvas.getContext('2d');
@@ -12,6 +14,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.ckeckCollisions();
 
     }
 
@@ -19,16 +22,36 @@ class World {
         this.character.world = this;
     }
 
+    ckeckCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    this.character.hit();
+                    this.lifeBar.setPercentage(this.character.energy);
+                }
+            });
+        }, 200);
+    }
+
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //Canvas wird immer wieder geleert
+
         this.ctx.translate(this.camera_x, 0); //Der Ausschnitt wird 100 Px nach Links verschoben.
         //Dann malen wir alle Objekte
         this.addObjectsToMap(this.level.backgroundObjects);
+
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.lifeBar);
+        this.ctx.translate(this.camera_x, 0);
+
+        this.addToMap(this.character);
+
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coin);
         this.addObjectsToMap(this.level.bottel);
         this.addObjectsToMap(this.level.enemies);
-        this.addToMap(this.character);
+
 
         this.ctx.translate(-this.camera_x, 0); //Dann schieben wir unseren ctx wieder nach rechts. 
 
@@ -54,17 +77,27 @@ class World {
     addToMap(mo) {
         //diese If Abfrage nimmt das umdrehen des Bildes vor. 
         if (mo.otherDirection) { //es wird überprüft ob, das Objekt eine andere Richtung hat, wenn ja dann...
-            this.ctx.save(); //speichern wir die aktuelle Einstellung
-            this.ctx.translate(mo.width, 0); //Das Canvas wird um die Breite des Characters verschoben.
-            this.ctx.scale(-1, 1);
-            mo.x = mo.x * -1; //Die X Koordinate wird umgedreht
+            this.flipImage(mo);
         }
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-        //Jetzt wird es wieder Rückgängig gemacht, damit nicht alle Bilder gespiegelt angezeigt werden.
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
+
+
         if (mo.otherDirection) {
-            mo.x = mo.x * -1;
-            this.ctx.restore();
+            this.flipImageBack(mo);
         }
+    }
+
+    flipImage(mo) {
+        this.ctx.save(); //speichern wir die aktuelle Einstellung
+        this.ctx.translate(mo.width, 0); //Das Canvas wird um die Breite des Characters verschoben.
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1; //Die X Koordinate wird umgedreht
+    }
+
+    flipImageBack(mo) {
+        mo.x = mo.x * -1;
+        this.ctx.restore();
     }
 
 }
