@@ -18,6 +18,7 @@
     <script src="models/background-object.class.js"></script>
     <script src="models/keyboard.class.js"></script>
     <script src="models/level.class.js"></script>
+    <script src="models/throwable-object.class.js"></script>
     <script src="models/endboss.class.js"></script>
     <script src="models/bottles.class.js"></script>
     <script src="models/coins.class.js"></script>
@@ -28,9 +29,42 @@
 
 <body onload="init()">
 
-    <h1>El Pollo Loco</h1>
+    <div class="play-container">
 
-    <canvas id="canvas" width="720" height="480"></canvas>
+        <div class="explain-container">
+            <div class="explain">
+                <img class="icon" src="img/10.front_screen/arrow-left.png">
+                <img class="icon" src="img/10.front_screen/arrow-right.png">
+                <span class="explain-span">walk</span> </div>
+            <div class="explain">
+                <img class="icon" src="img/10.front_screen/arrow-up.png">
+                <span class="explain-span">jump</span>
+            </div>
+            <div class="explain">
+                <img class="icon" src="img/10.front_screen/space.png">
+                <span class="explain-span">jump</span>
+            </div>
+            <div class="explain">
+                <img class="icon" src="img/10.front_screen/letter-d.png">
+                <span class="explain-span">throw bottle</span>
+            </div>
+        </div>
+
+        <div class="start-screen" id="start-screen">
+            <img src="img/9.Intro _ Outro Image/Start Screen/Opción2.png">
+            <div class="buttoncontainer"><button id="start-game-btn" onclick="startGame()">PLay</button></div>
+        </div>
+        <canvas id="canvas" width="805" height="500"></canvas>
+        <div class="full-screen-icon-container" onclick="fullScreen()">
+            <img class="icon fullscreen" src="img/10.front_screen/fullscreen.png">
+            <span class="explain-span">[Fullscreen]</span>
+        </div>
+    </div>
+
+
+
+
+
 
 </body>
 

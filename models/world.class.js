@@ -7,6 +7,7 @@ class World {
     camera_x = 0; //Variable die die ganze Welt (Canvas) verschiebt.
     lifeBar = new LifeBar();
     coinBar = new CoinBar();
+    throwableObjects = [new ThrowableObject()];
 
     constructor(canvas, keyboard) { //Das Keyboard muss ebenfalls an den Constructor weitergegeben werden. 
         this.ctx = canvas.getContext('2d');
@@ -14,7 +15,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.ckeckCollisions();
+        this.run();
 
     }
 
@@ -22,15 +23,27 @@ class World {
         this.character.world = this;
     }
 
-    ckeckCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.lifeBar.setPercentage(this.character.energy);
-                }
-            });
+            this.checkCollisions();
+            this.checkThrowObjects();
         }, 200);
+    }
+
+    checkThrowObjects() {
+        if (this.keyboard.D) {
+            let bottles = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(bottles);
+        }
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.lifeBar.setPercentage(this.character.energy);
+            }
+        });
     }
 
 
@@ -51,6 +64,7 @@ class World {
         this.addObjectsToMap(this.level.coin);
         this.addObjectsToMap(this.level.bottel);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
 
 
         this.ctx.translate(-this.camera_x, 0); //Dann schieben wir unseren ctx wieder nach rechts. 

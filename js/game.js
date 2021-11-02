@@ -4,11 +4,28 @@ let keyboard = new Keyboard();
 
 
 function init() {
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard); //Die Variable Keyboard muss ebenfalls (wie das Canvas) an die Welt übergeben werden damit es existiert. 
+    // canvas = document.getElementById('canvas');
+    // world = new World(canvas, keyboard); //Die Variable Keyboard muss ebenfalls (wie das Canvas) an die Welt übergeben werden damit es existiert. 
 
     console.log('My Character is', world.character);
 }
+
+
+function startGame() {
+    document.getElementById('start-screen').classList.add('d-none');
+    document.getElementById('start-game-btn').classList.add('d-none');
+    canvas = document.getElementById('canvas');
+    keyboard = new Keyboard();
+    world = new World(canvas, keyboard);
+
+}
+
+function fullScreen() {
+    canvas.requestFullscreen();
+}
+
+
+
 
 
 //Sobald die Tasten gedrückt werden werden sie aktiviert.
