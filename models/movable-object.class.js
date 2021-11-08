@@ -1,9 +1,9 @@
 class MovableObject extends DrawableObject {
 
-    speed = 0.15;
+    speed = 0.3;
     otherDirection = false; //Übergreifende Variable zum Spiegeln der Bilder. 
     speedY = 0;
-    acceleration = 2.5;
+    acceleration = 2;
     energy = 100;
     lastHit = 0;
 
@@ -14,7 +14,7 @@ class MovableObject extends DrawableObject {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-        }, 1000 / 25);
+        }, 1000 / 60);
     }
 
     isAboveGround() {
@@ -25,8 +25,13 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    isLanding() {
+        return this.speedY < 0 && this.isAboveGround();
+    }
+
     moveRight() {
         this.x += this.speed;
+        this.otherDirection = false;
     }
 
 
@@ -47,7 +52,7 @@ class MovableObject extends DrawableObject {
     }
 
     jump() {
-        this.speedY = 25;
+        return this.speedY = 25;
     }
 
     isColliding(mo) {

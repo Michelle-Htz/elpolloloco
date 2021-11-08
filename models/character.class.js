@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-    height = 250;
+    height = 280;
     width = 150;
     y = 80;
     speed = 10;
@@ -51,9 +51,8 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
-
-        this.applyGravity();
         this.animate();
+        this.applyGravity();
     }
 
     animate() {
@@ -71,7 +70,6 @@ class Character extends MovableObject {
                     this.moveRight();
                     //&& = x kleiner als (700) dann darf er nicht weiter laufen.
                     this.otherDirection = false;
-                    this.walking_sound.volume = 0.01;
                     this.walking_sound.play();
                 }
 
@@ -81,13 +79,13 @@ class Character extends MovableObject {
                     //&& = und x muss kleiner sein als wold.level_end_x (700)
                     this.moveLeft();
                     this.otherDirection = true;
-                    this.walking_sound.volume = 0.01;
                     this.walking_sound.play();
                 }
 
 
                 if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                     //wenn wir die Space Taste drücken und unser Character ist nicht über dem Boden, dann springen wir, deshalb das Ausrufezeichen davor
+                    this.walking_sound.pause();
                     this.jump();
                 }
                 this.world.camera_x = -this.x + 100; //+100 schiebt den Character weiter nach rechts. 
