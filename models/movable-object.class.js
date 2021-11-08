@@ -3,7 +3,7 @@ class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false; //Übergreifende Variable zum Spiegeln der Bilder. 
     speedY = 0;
-    acceleration = 2;
+    acceleration = 2.5;
     energy = 100;
     lastHit = 0;
 
@@ -21,7 +21,7 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) {
             return true;
         } else {
-            return this.y < 180;
+            return this.y < 150;
         }
     }
 

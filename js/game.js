@@ -7,7 +7,6 @@ function init() {
     // canvas = document.getElementById('canvas');
     // world = new World(canvas, keyboard); //Die Variable Keyboard muss ebenfalls (wie das Canvas) an die Welt übergeben werden damit es existiert. 
 
-    console.log('My Character is', world.character);
 }
 
 

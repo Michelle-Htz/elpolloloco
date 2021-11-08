@@ -65,29 +65,34 @@ class Character extends MovableObject {
             } else {
 
                 this.walking_sound.pause();
+
+
                 if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     //&& = x kleiner als (700) dann darf er nicht weiter laufen.
-                    this.walking_sound.play();
                     this.otherDirection = false;
+                    this.walking_sound.volume = 0.01;
+                    this.walking_sound.play();
                 }
+
                 if (this.world.keyboard.LEFT && this.x > 0) {
                     this.walking_sound.pause();
                     //nur wenn x größer als Null ist kann er nach links laufen, ansonsten bleibt er stehen.
                     //&& = und x muss kleiner sein als wold.level_end_x (700)
                     this.moveLeft();
-                    this.walking_sound.play();
                     this.otherDirection = true;
+                    this.walking_sound.volume = 0.01;
+                    this.walking_sound.play();
                 }
 
 
-                if (this.world.keyboard.UP || this.world.keyboard.SPACE && !this.isAboveGround()) {
+                if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                     //wenn wir die Space Taste drücken und unser Character ist nicht über dem Boden, dann springen wir, deshalb das Ausrufezeichen davor
                     this.jump();
                 }
                 this.world.camera_x = -this.x + 100; //+100 schiebt den Character weiter nach rechts. 
             }
-        }, 1000 / 60);
+        }, 1000 / 50);
         //mein soll dem IMG aus dem Chache entsprechen soll 
         setInterval(() => {
 
