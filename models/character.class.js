@@ -1,6 +1,5 @@
 class Character extends MovableObject {
-    height = 280;
-    width = 150;
+    height = 240;
     y = 80;
     speed = 10;
     IMAGES_WALKING = [
@@ -58,39 +57,35 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
-            if (this.isAboveGround()) {
-                //Immer wenn er sich über dem Boden befindet spiele ich die Bilder aus dem zweiten Array ab. 
-                this.playAnimation(this.IMAGES_JUMPING);
-            } else {
 
-                this.walking_sound.pause();
+            this.walking_sound.pause();
 
 
-                if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                    this.moveRight();
-                    //&& = x kleiner als (700) dann darf er nicht weiter laufen.
-                    this.otherDirection = false;
-                    this.walking_sound.play();
-                }
-
-                if (this.world.keyboard.LEFT && this.x > 0) {
-                    this.walking_sound.pause();
-                    //nur wenn x größer als Null ist kann er nach links laufen, ansonsten bleibt er stehen.
-                    //&& = und x muss kleiner sein als wold.level_end_x (700)
-                    this.moveLeft();
-                    this.otherDirection = true;
-                    this.walking_sound.play();
-                }
-
-
-                if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                    //wenn wir die Space Taste drücken und unser Character ist nicht über dem Boden, dann springen wir, deshalb das Ausrufezeichen davor
-                    this.walking_sound.pause();
-                    this.jump();
-                }
-                this.world.camera_x = -this.x + 100; //+100 schiebt den Character weiter nach rechts. 
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+                this.moveRight();
+                //&& = x kleiner als (700) dann darf er nicht weiter laufen.
+                this.otherDirection = false;
+                this.walking_sound.play();
             }
-        }, 1000 / 50);
+
+            if (this.world.keyboard.LEFT && this.x > 0) {
+                this.walking_sound.pause();
+                //nur wenn x größer als Null ist kann er nach links laufen, ansonsten bleibt er stehen.
+                //&& = und x muss kleiner sein als wold.level_end_x (700)
+                this.moveLeft();
+                this.otherDirection = true;
+                this.walking_sound.play();
+            }
+
+
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+                //wenn wir die Space Taste drücken und unser Character ist nicht über dem Boden, dann springen wir, deshalb das Ausrufezeichen davor
+                this.walking_sound.pause();
+                this.jump();
+            }
+            this.world.camera_x = -this.x + 100; //+100 schiebt den Character weiter nach rechts. 
+
+        }, 60);
         //mein soll dem IMG aus dem Chache entsprechen soll 
         setInterval(() => {
 
@@ -106,7 +101,7 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
-        }, 50);
+        }, 60);
     }
 
 }

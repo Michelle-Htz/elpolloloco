@@ -6,6 +6,11 @@ class MovableObject extends DrawableObject {
     acceleration = 2;
     energy = 100;
     lastHit = 0;
+    endbossenergy = 100;
+
+    collectionCoins = 0;
+    collectionBottles = 0;
+
 
 
     applyGravity() {
@@ -14,7 +19,7 @@ class MovableObject extends DrawableObject {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-        }, 1000 / 60);
+        }, 60);
     }
 
     isAboveGround() {
@@ -73,7 +78,7 @@ class MovableObject extends DrawableObject {
     }
 
     isDead() {
-        return this.energy == 0;
+        return this.energy == 0 || this.enemyEnergy == 0;
     }
 
     isHurt() {
@@ -81,5 +86,21 @@ class MovableObject extends DrawableObject {
         //die aktuelle Zeit wird genommen und der letzte Schlag wird von ihr abgezogen. 
         timepassed = timepassed / 1000; //Diferenz in Sekunden
         return timepassed < 1;
+    }
+
+    isStamping(enemy) {
+        return this.isLanding() && (this.getBottomPos() + 29) - enemy.getTopPos();
+    }
+
+    isLanding() {
+        return this.speedY < 0 && this.isAboveGround();
+    }
+
+    getBottomPos() {
+        return this.y + this.height;
+    }
+
+    getTopPos() {
+        return this.y;
     }
 }
