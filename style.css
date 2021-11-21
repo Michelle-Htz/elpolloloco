@@ -2,26 +2,46 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url(img/5.Fondo/1.png);
-    background-size: cover;
-    object-position: center;
-    background-repeat: no-repeat;
-    height: 90vh;
-    width: 90vw;
+    justify-content: center;
+    background-color: white;
+    font-family: 'Comforter Brush', cursive;
+    font-size: 30px;
 }
 
 .d-none {
     display: none;
 }
 
+.bg-1 {
+    height: 50px;
+    display: flex;
+    width: 100vw;
+    justify-content: end;
+}
+
+.bg-2 {
+    display: flex;
+    margin-top: 20px;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-img {
+    height: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 canvas {
+    border-radius: 10px;
     background-color: transparent;
+    display: block;
 }
 
 .play-container {
-    background-color: white;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    width: 720px;
+    height: 50px;
     padding-left: 5px;
     padding-right: 5px;
     border-radius: 10px;
@@ -30,6 +50,7 @@ canvas {
 .explain-container {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .explain {
@@ -53,9 +74,10 @@ canvas {
 }
 
 .start-screen img {
+    border-radius: 10px;
     position: absolute;
-    height: 500px;
-    width: 805px;
+    height: 480px;
+    width: 720px;
 }
 
 .start-screen button {
@@ -79,4 +101,35 @@ canvas {
 .fullscreen:hover {
     height: 22px;
     width: 22px;
+}
+
+@media only screen and (max-width: 720px) {
+    canvas {
+        position: absolute !important;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .start-screen {
+        position: absolute !important;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        position: absolute !important;
+        height: 100vh;
+        width: 100vw;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 }

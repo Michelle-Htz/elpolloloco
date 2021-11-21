@@ -10,7 +10,7 @@ class BottleBar extends DrawableObject {
 
     ];
 
-    bottelAmount = 0;
+    persentage = 0;
 
     constructor() {
         super();
@@ -19,25 +19,25 @@ class BottleBar extends DrawableObject {
         this.y = 5;
         this.width = 180;
         this.height = 40;
-        this.setCollectedBottles(this.bottleAmount);
+        this.setCollectedBottles(this.persentage);
     }
 
-    setCollectedBottles(bottleAmount) {
-        this.bottleAmount = bottleAmount; // => 0 ... 5
-        let path = this.BOTTLEBAR_IMAGES[this.resolveImageIndex(bottleAmount)];
+    setCollectedBottles(persentage) {
+        this.persentage = persentage; // => 0 ... 5
+        let path = this.BOTTLEBAR_IMAGES[this.resolveImageIndex(persentage)];
         this.img = this.imageCache[path];
     }
 
-    resolveImageIndex(bottleAmount) {
-        if (this.bottleAmount == 10) {
+    resolveImageIndex(persentage) {
+        if (this.persentage == 10) {
             return 5;
-        } else if (this.bottleAmount >= 8) {
+        } else if (this.persentage >= 8) {
             return 4;
-        } else if (this.bottleAmount >= 6) {
+        } else if (this.persentage >= 6) {
             return 3;
-        } else if (this.bottleAmount >= 4) {
+        } else if (this.persentage >= 4) {
             return 2;
-        } else if (this.bottleAmount >= 2) {
+        } else if (this.persentage >= 2) {
             return 1;
         } else {
             return 0;

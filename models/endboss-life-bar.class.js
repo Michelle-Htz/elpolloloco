@@ -14,10 +14,10 @@ class EndbossLifeBar extends DrawableObject {
     constructor() {
         super();
         this.loadImages(this.IMAGES_ENDBOSSLIFEBAR);
-        this.x = 600;
-        this.y = 420;
-        this.width = 200;
-        this.height = 60;
+        this.x = 530;
+        this.y = 430;
+        this.width = 180;
+        this.height = 40;
         this.setPercentage(50);
     }
 

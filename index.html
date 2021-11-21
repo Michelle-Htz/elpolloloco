@@ -27,9 +27,16 @@
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet">
+
 </head>
 
 <body onload="init()">
+
+    <div class="bg-1">
+        <img class="bg-img" src="img/10.front_screen/bg2.png"></div>
 
     <div class="play-container">
 
@@ -46,17 +53,26 @@
                 <img class="icon" src="img/10.front_screen/letter-d.png">
                 <span class="explain-span">throw bottle</span>
             </div>
+
+            <div class="explain" onclick="fullScreen()">
+                <img class="icon fullscreen" src="img/10.front_screen/fullscreen.png">
+                <span class="explain-span">[Fullscreen]</span>
+            </div>
+
         </div>
 
         <div class="start-screen" id="start-screen">
             <img src="img/9.Intro _ Outro Image/Start Screen/Opción2.png">
             <div class="buttoncontainer"><button id="start-game-btn" onclick="startGame()">PLay</button></div>
         </div>
-        <canvas id="canvas" width="805" height="500"></canvas>
-        <div class="full-screen-icon-container" onclick="fullScreen()">
-            <img class="icon fullscreen" src="img/10.front_screen/fullscreen.png">
-            <span class="explain-span">[Fullscreen]</span>
-        </div>
+    </div>
+
+    <canvas id="canvas" width="720" height="480"></canvas>
+    <div class="bg-2">
+        <img class="bg-img" src="img/10.front_screen/bg1.png">
+        <span> Hilf Pepe die Hühnchen zu besiegen, die Flaschen einzusammeln<br> 
+            und das <b>BOSSHUHN</b> mit der Salsa-Soße zu killen.
+        </span>
     </div>
 
 
